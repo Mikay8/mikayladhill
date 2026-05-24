@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" shape-rendering="geometricPrecision">
+  
+  <defs>
+    <pattern id="rule" width="512" height="48" patternUnits="userSpaceOnUse">
+      <rect width="512" height="48" fill="#f3ede2"></rect>
+      <rect y="47" width="512" height="1" fill="#1a1a1a" opacity="0.06"></rect>
+    </pattern>
+  </defs>
+  <rect width="512" height="512" rx="64" fill="url(#rule)"></rect>
+  
+  <rect x="8" y="8" width="496" height="496" rx="58" fill="none" stroke="#1a1a1a" stroke-width="6"></rect>
+
+  
+  <g font-family="ui-monospace, &#39;JetBrains Mono&#39;, Menlo, monospace" font-weight="800">
+    
+    <text x="56" y="100" font-size="28" fill="#1a1a1a" opacity="0.55" letter-spacing="4">~/mikayla</text>
+
+    
+    <text x="56" y="280" font-size="170" fill="#2a8f4f">$</text>
+    
+    <text x="180" y="280" font-size="170" fill="#1a1a1a" letter-spacing="-8">m.</text>
+
+    
+    <g transform="skewX(-6)">
+      <rect x="60" y="320" width="320" height="60" fill="#1a1a1a"></rect>
+      <text x="78" y="368" font-size="48" fill="#f3ede2" letter-spacing="2">hill.dev</text>
+    </g>
+
+    
+    <rect x="400" y="208" width="56" height="72" fill="#e8941a"></rect>
+
+    
+    <text x="56" y="450" font-size="22" fill="#1a1a1a" opacity="0.55" letter-spacing="2">software · react · finance ux</text>
+  </g>
+</svg>

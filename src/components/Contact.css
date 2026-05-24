@@ -1,0 +1,54 @@
+.play {
+  background: var(--term-bg);
+  color: var(--term-fg);
+  border: 1px solid var(--ink);
+  border-radius: 6px;
+  box-shadow: 6px 6px 0 var(--ink);
+  overflow: hidden;
+  font-size: 14px;
+}
+.play .chrome {
+  background: #222;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--term-dim);
+  font-size: 12px;
+}
+.play .chrome i {
+  width: 11px; height: 11px; border-radius: 50%;
+}
+.play .chrome i:nth-child(1) { background: #ed6a5e; }
+.play .chrome i:nth-child(2) { background: #f4bf4f; }
+.play .chrome i:nth-child(3) { background: #62c655; }
+.play .body {
+  padding: 18px 20px 16px;
+  min-height: 280px;
+  max-height: 420px;
+  overflow-y: auto;
+}
+.play .input-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 10px 20px 16px;
+  border-top: 1px dashed #333;
+  cursor: text;
+}
+.play .input-row input {
+  flex: 1;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  color: var(--term-fg);
+  font-family: inherit;
+  font-size: 14px;
+  caret-color: var(--amber);
+}
+.play .hint {
+  color: var(--term-dim);
+  font-size: 12px;
+  padding: 0 20px 14px;
+}
+.play .hint b { color: var(--amber); font-weight: 500; }

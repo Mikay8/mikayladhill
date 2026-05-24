@@ -1,0 +1,28 @@
+.hob-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+@media (max-width: 760px) {
+  .hob-grid { grid-template-columns: 1fr; }
+}
+.hob {
+  border: 1px solid var(--ink);
+  background: var(--paper-2);
+  box-shadow: 4px 4px 0 var(--ink);
+  border-radius: 6px;
+  padding: 22px;
+  position: relative;
+  overflow: hidden;
+}
+.hob h4 { margin: 0 0 8px; font-size: 18px; font-weight: 700; letter-spacing: -.01em; }
+.hob p { margin: 0; color: var(--ink-2); font-size: 14px; }
+.hob .ico { width: 54px; height: 54px; margin-bottom: 12px; }
+.hob .tag {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-size: 11px;
+  color: var(--ink-3);
+  letter-spacing: .06em;
+}

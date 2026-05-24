@@ -1,0 +1,89 @@
+.crrnt-demo {
+  background: var(--term-bg);
+  border: 1px solid var(--ink);
+  border-radius: 6px;
+  box-shadow: 4px 4px 0 var(--ink);
+  overflow: hidden;
+  color: var(--term-fg);
+  font-size: 13px;
+}
+.crrnt-chrome {
+  background: #222;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--term-dim);
+  font-size: 12px;
+  border-bottom: 1px solid #000;
+}
+.crrnt-chrome i {
+  width: 11px; height: 11px; border-radius: 50%; display: inline-block;
+}
+.crrnt-chrome i:nth-child(1) { background: #ed6a5e; }
+.crrnt-chrome i:nth-child(2) { background: #f4bf4f; }
+.crrnt-chrome i:nth-child(3) { background: #62c655; }
+.crrnt-chrome span { margin-left: 8px; }
+
+.crrnt-tickers { display: flex; flex-direction: column; }
+.ticker-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border: none;
+  border-bottom: 1px solid #222;
+  background: transparent;
+  color: var(--term-fg);
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: left;
+  transition: background .12s;
+}
+.ticker-row:last-child { border-bottom: 0; }
+.ticker-row:hover, .ticker-row.active { background: #1f1f1f; }
+.ticker-left { display: flex; flex-direction: column; min-width: 80px; }
+.ticker-left .sym { font-weight: 700; color: var(--amber); font-size: 14px; }
+.ticker-left .name { color: var(--term-dim); font-size: 11px; margin-top: 1px; }
+.ticker-right { display: flex; flex-direction: column; align-items: flex-end; margin-left: auto; }
+.ticker-right .price { font-weight: 600; font-size: 14px; }
+.ticker-right .chg { font-size: 11.5px; margin-top: 1px; }
+.ticker-right .chg.up { color: var(--green); }
+.ticker-right .chg.dn { color: var(--red); }
+
+.crrnt-detail {
+  border-top: 1px dashed #333;
+  padding: 14px 16px;
+  background: #1a1a1a;
+}
+.detail-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.detail-head .sym { font-weight: 700; color: var(--amber); }
+.ai-badge {
+  font-size: 10px;
+  padding: 2px 8px;
+  border: 1px solid var(--purple);
+  border-radius: 999px;
+  color: var(--purple);
+  letter-spacing: .06em;
+}
+.crrnt-detail p {
+  color: var(--term-fg);
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0 0 10px;
+}
+.detail-footer { color: var(--term-dim); font-size: 11px; }
+
+.crrnt-hint {
+  padding: 14px 16px;
+  color: var(--term-dim);
+  font-size: 12px;
+  border-top: 1px dashed #333;
+  text-align: center;
+}
