@@ -138,9 +138,29 @@
   text-transform: uppercase;
 }
 
+/* mobile copy hidden on desktop */
+.hero-term-mobile { display: none; }
+
 @media (max-width: 880px) {
-  .hero-top { grid-template-columns: 1fr; gap: 16px; }
-  .hero-top .viewer { max-width: 220px; }
+  .hero-top {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .hero-top .viewer {
+    max-width: 220px;
+    margin: 0 auto;
+  }
+  /* hide the in-grid terminal on mobile */
+  .hero-top .hero-term {
+    display: none;
+  }
+  /* show the duplicate below the chips instead */
+  .hero-term-mobile {
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+    margin-bottom: 4px;
+  }
 }
 @media (max-width: 760px) {
   .stat-strip { grid-template-columns: repeat(2, 1fr); }

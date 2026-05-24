@@ -34,7 +34,7 @@ export default function Hobbies() {
               <path d="M38 22 H 50 M 38 28 H 50 M 38 34 H 48" />
             </svg>
             <h4>Read.</h4>
-            <p>Currently rotating between speculative fiction and the occasional engineering essay. Bookshelf overfull.</p>
+            <p>Currently rotating between science fiction and fantasy. </p>
           </div>
 
           <div className="hob" data-reveal>
@@ -48,7 +48,7 @@ export default function Hobbies() {
               <path d="M24 44 L 22 58 L 28 58 Z" fill="#1a1a1a"/>
             </svg>
             <h4>Paint.</h4>
-            <p>Mostly acrylics, mostly experimental, occasionally hung on a wall. Good for the parts of my brain that read JSON all day.</p>
+            <p>Mostly acrylics, mostly experimental, occasionally hung on a wall.</p>
           </div>
         </div>
       </div>

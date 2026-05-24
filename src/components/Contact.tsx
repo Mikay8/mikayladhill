@@ -12,19 +12,19 @@ const COMMANDS: Record<string, () => Line[]> = {
     { type: 'output', html: '<span class="pa">Available commands:</span>' },
     { type: 'output', html: '  <span class="pa">whoami</span>       — about Mikayla' },
     { type: 'output', html: '  <span class="pa">socials</span>      — links & contact info' },
-    { type: 'output', html: '  <span class="pa">resume</span>       — open resume PDF' },
+    { type: 'output', html: '  <span class="pa">resume</span>       — download resume PDF' },
     { type: 'output', html: '  <span class="pa">ask &lt;q&gt;</span>      — ask me anything' },
     { type: 'output', html: '  <span class="pa">sudo hire me</span> — try it 😄' },
     { type: 'output', html: '  <span class="pa">clear</span>        — clear terminal' },
     { type: 'blank' },
   ],
   whoami: () => [
-    { type: 'output', html: '<span class="pw">Mikayla D. Hill</span>' },
+    { type: 'output', html: '<span class="pw">Mikayla Hill</span>' },
     { type: 'output', text: 'Software Engineer II @ J.P. Morgan Chase' },
     { type: 'output', text: 'MS Computer Science candidate @ Georgia Tech (OMSCS)' },
     { type: 'output', text: 'Building: CRRNT · Sorority Event Tracker' },
     { type: 'output', text: 'Stack: React · TypeScript · Python · FastAPI · Supabase' },
-    { type: 'output', html: 'Location: <span class="pa">Jersey City, NJ</span>' },
+    { type: 'output', html: 'Location: <span class="pa">New York City</span>' },
     { type: 'blank' },
   ],
   socials: () => [
@@ -35,9 +35,12 @@ const COMMANDS: Record<string, () => Line[]> = {
     { type: 'blank' },
   ],
   resume: () => {
-    window.open('/assets/resume.pdf', '_blank');
+    const a = document.createElement('a');
+    a.href = '/assets/resume.pdf';
+    a.download = 'Mikayla_Hill_Resume.pdf';
+    a.click();
     return [
-      { type: 'output', html: '<span class="pp">Opening resume.pdf...</span>' },
+      { type: 'output', html: '<span class="pp">Downloading resume.pdf...</span>' },
       { type: 'blank' },
     ];
   },

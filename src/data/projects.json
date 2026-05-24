@@ -1,0 +1,20 @@
+[
+  {
+    "id": "presnt",
+    "title": "Presnt — Extracurricular Attendance & Compliance Platform",
+    "sub": "Attendance tracking, dues, compliance, event management · 2025 → now",
+    "description": "A full-stack mobile + web platform built for organizations to manage event attendance, member compliance, dues, and chapter oversight. Features passive geofence check-in, QR code scanning, role-based access, real-time notifications, and a multi-org hierarchy. Built end-to-end — Supabase schema with RLS, Express API, React Native mobile app, and a web dashboard.",
+    "stack": ["React Native", "Expo", "TypeScript", "Express", "Node.js", "Supabase", "PostgreSQL", "Zustand", "Zod", "Railway"],
+    "github": "https://github.com/Mikay8/Presnt",
+    "demo": "https://workspacepresnt-production.up.railway.app",
+    "default": true
+  },{
+    "id": "crrnt",
+    "title": "CRRNT",
+    "sub": "News + markets + AI insights, in your pocket · Apr 2026 → now",
+    "description": "A mobile app that makes trending news feel personal — every story is paired with a relevant stock ticker, live price chart, and Claude-generated breakdowns of what it actually means for your rent, job, and wallet. Categories span Celebrity, Tech, Government, Sports, Business, Science, and Entertainment. Audio playback is generated on-demand via Fish Audio TTS, with personalized scripts for paid subscribers based on their city, job type, and financial goals. Built solo — design, all frontend screens, and a FastAPI backend that handles daily ingestion (NewsMesh + X/Twitter sentiment via GetXAPI), Claude enrichment (claude-haiku-4-5), RevenueCat subscriptions, Supabase Auth + Postgres, push notifications, an investment simulator, and a Jinja2 admin portal.",
+    "stack": ["React Native", "Expo", "TypeScript", "FastAPI", "Python", "Claude SDK", "Supabase", "Fish Audio", "RevenueCat", "yfinance"],
+    "github": "https://github.com/Mikay8/CRRNT",
+    "demo": ""
+  }
+]

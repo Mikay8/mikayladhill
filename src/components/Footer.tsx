@@ -29,7 +29,7 @@ export default function Footer() {
           </a>
         </div>
         <div className="legal">
-          <span>© 2026 Mikayla D. Hill · made by hand, with too much coffee.</span>
+          <span>© 2026 Mikayla Hill · made with claude.</span>
           <span>last commit · 2026-05-24 · main</span>
         </div>
       </div>
