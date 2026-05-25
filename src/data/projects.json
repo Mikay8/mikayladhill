@@ -6,7 +6,7 @@
     "description": "A full-stack mobile + web platform built for organizations to manage event attendance, member compliance, dues, and chapter oversight. Features passive geofence check-in, QR code scanning, role-based access, real-time notifications, and a multi-org hierarchy. Built end-to-end — Supabase schema with RLS, Express API, React Native mobile app, and a web dashboard.",
     "stack": ["React Native", "Expo", "TypeScript", "Express", "Node.js", "Supabase", "PostgreSQL", "Zustand", "Zod", "Railway"],
     "github": "https://github.com/Mikay8/Presnt",
-    "demo": "https://workspacepresnt-production.up.railway.app",
+    "demo": "https://www.presnt.link/demo",
     "default": true
   },{
     "id": "crrnt",
