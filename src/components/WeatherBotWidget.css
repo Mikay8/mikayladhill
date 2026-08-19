@@ -1,0 +1,146 @@
+.wb-widget {
+  position: relative;
+  border-radius: 6px;
+  border: 1px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+  overflow: hidden;
+  padding: 26px 30px 24px;
+  color: #f2f0ea;
+  background: linear-gradient(135deg, #1e3a5f 0%, #2c3a78 45%, #3a2f6e 100%);
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+}
+
+.wb-widget--empty {
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--term-dim);
+  background: var(--term-bg);
+}
+
+.wb-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.wb-loc {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .65);
+}
+
+.wb-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10.5px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .55);
+}
+
+.wb-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #7fe0a3;
+  box-shadow: 0 0 6px #7fe0a3;
+}
+
+.wb-live--mock .wb-live-dot {
+  background: #f5c451;
+  box-shadow: 0 0 6px #f5c451;
+}
+
+.wb-cols {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+@media (max-width: 760px) {
+  .wb-cols {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+  }
+}
+
+.wb-col-divider {
+  width: 1px;
+  align-self: stretch;
+  background: rgba(255, 255, 255, .14);
+}
+@media (max-width: 760px) {
+  .wb-col-divider {
+    width: auto;
+    height: 1px;
+  }
+}
+
+.wb-weather {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #f5c451;
+  flex-shrink: 0;
+}
+
+.wb-temp {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 40px;
+  font-weight: 300;
+  line-height: 1;
+  color: #fff;
+  letter-spacing: -.02em;
+}
+
+.wb-temp-cond {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, .6);
+}
+
+.wb-wallet {
+  flex-shrink: 0;
+}
+
+.wb-wallet-label {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .55);
+  margin-bottom: 4px;
+}
+
+.wb-wallet-balance {
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  color: #fff;
+}
+
+.wb-wallet-pnl {
+  margin-top: 2px;
+  font-size: 12.5px;
+  font-weight: 500;
+}
+.wb-wallet-pnl.up { color: #8de3b0; }
+.wb-wallet-pnl.dn { color: #e2938c; }
+
+.wb-history {
+  flex: 1;
+  min-width: 160px;
+}
+
+.wb-sparkline {
+  display: block;
+  margin-top: 6px;
+}

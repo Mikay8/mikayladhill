@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './Projects.css';
 import projects from '../data/projects.json';
+import WeatherBotWidget from './WeatherBotWidget';
 
 type Project = (typeof projects)[number];
 
@@ -15,6 +16,7 @@ export default function Projects() {
   }
 
   const demoUrl = selected?.demo ?? '';
+  const isWeatherbot = selected?.id === 'weatherbot';
   const demoLabel = selected ? `./${selected.id} --demo` : 'select a project ←';
 
   return (
@@ -40,7 +42,12 @@ export default function Projects() {
               >
                 <div className="top">
                   <div>
-                    <h3>{p.title}</h3>
+                    <div className="proj-title-row">
+                      <h3>{p.title}</h3>
+                      {'status' in p && p.status === 'building' && (
+                        <span className="pill pill-green">currently building</span>
+                      )}
+                    </div>
                     <div className="sub">{p.sub}</div>
                   </div>
                   {selected?.id === p.id && <span className="active-badge">● previewing</span>}
@@ -79,7 +86,12 @@ export default function Projects() {
                   <span className="pd">// click a project card to load its demo</span>
                 </div>
               )}
-              {selected && !demoUrl && (
+              {selected && isWeatherbot && (
+                <div className="demo-embed">
+                  <WeatherBotWidget />
+                </div>
+              )}
+              {selected && !isWeatherbot && !demoUrl && (
                 <div className="demo-empty">
                   <span className="pd">// project not deployed publicly yet</span>
                   {selected.github && (
@@ -94,7 +106,7 @@ export default function Projects() {
                   )}
                 </div>
               )}
-              {selected && demoUrl && (
+              {selected && !isWeatherbot && demoUrl && (
                 <iframe
                   key={demoUrl}
                   src={demoUrl}
