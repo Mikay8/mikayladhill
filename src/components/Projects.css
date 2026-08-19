@@ -42,6 +42,7 @@
   justify-content: space-between;
   gap: 10px;
 }
+.proj-title-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .proj-card h3 { margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -.02em; }
 .proj-card .sub { color: var(--ink-3); font-size: 13px; margin-top: 4px; }
 .proj-card.active h3 { color: var(--purple); }
@@ -117,4 +118,43 @@
   min-height: 480px;
   display: block;
   background: #fff;
+}
+
+.demo-embed {
+  flex: 1;
+  display: flex;
+  padding: 18px;
+}
+.demo-embed > * {
+  width: 100%;
+}
+
+/* ── Status pill ── */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+.pill::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+.pill-green {
+  background: rgba(42, 143, 79, .12);
+  border-color: var(--green);
+  color: var(--green);
+}
+.pill-green::before {
+  background: var(--green);
+  box-shadow: 0 0 5px var(--green);
 }
