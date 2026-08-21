@@ -23,7 +23,7 @@
     "description": "A weather-forecasting trading bot that pulls NWS forecasts and Kalshi KXHIGHNY market odds for NYC daily highs, compares model probability against market pricing, and paper-trades the edge on a schedule. Full-stack — FastAPI backend with scheduled ingestion/settlement crons, a Postgres store, and a Next.js dashboard for live weather, forecast drift, and simulated wallet performance.",
     "stack": ["Next.js", "TypeScript", "FastAPI", "Python", "PostgreSQL", "Railway"],
     "github": "https://github.com/Mikay8/mikaylas-weather-bot",
-    "demo": "https://web-production-b13b50.up.railway.app",
+    "demo": "https://web-demo-production-f7a9.up.railway.app/",
     "status": "building"
   }
 ]
