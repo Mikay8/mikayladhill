@@ -1,63 +1,39 @@
-import { useState } from 'react';
 import './Projects.css';
 import projects from '../data/projects.json';
 import WeatherBotWidget from './WeatherBotWidget';
 
-type Project = (typeof projects)[number];
-
 export default function Projects() {
-  const [selected, setSelected] = useState<Project | null>(
-    () => projects.find((p) => 'default' in p && p.default) ?? null
-  );
-
-  function handleSelect(p: Project) {
-    // Toggle off if already selected
-    setSelected((prev) => (prev?.id === p.id ? null : p));
-  }
-
-  const demoUrl = selected?.demo ?? '';
-  const isWeatherbot = selected?.id === 'weatherbot';
-  const demoLabel = selected ? `./${selected.id} --demo` : 'select a project ←';
-
   return (
     <section id="projects">
       <div className="wrap">
         <div className="sec-head">
           <span className="prompt">$</span>
           <span className="cmd">ls -la ~/projects</span>
-          <span className="tag">// 04 — projects · click a card to preview</span>
+          <span className="tag">// 04 — projects</span>
         </div>
 
-        <div className="proj-grid">
-          {/* ── Left: project cards ── */}
-          <div className="proj-list" data-reveal>
-            {projects.map((p) => (
-              <article
-                key={p.id}
-                className={`proj-card${selected?.id === p.id ? ' active' : ''}`}
-                onClick={() => handleSelect(p)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => e.key === 'Enter' && handleSelect(p)}
-              >
+        <div className="proj-grid-full" data-reveal>
+          {projects.map((p) => {
+            const isWeatherbot = p.id === 'weatherbot';
+            const demoUrl = p.demo ?? '';
+
+            return (
+              <article key={p.id} className="proj-card-full">
                 <div className="top">
-                  <div>
-                    <div className="proj-title-row">
-                      <h3>{p.title}</h3>
-                      {'status' in p && p.status === 'building' && (
-                        <span className="pill pill-green">currently building</span>
-                      )}
-                    </div>
-                    <div className="sub">{p.sub}</div>
+                  <div className="proj-title-row">
+                    <h3>{p.title}</h3>
+                    {'status' in p && p.status === 'building' && (
+                      <span className="pill pill-green">currently building</span>
+                    )}
                   </div>
-                  {selected?.id === p.id && <span className="active-badge">● previewing</span>}
+                  <div className="sub">{p.sub}</div>
                 </div>
                 <div className="body">
                   <p>{p.description}</p>
                   <div className="stack">
                     {p.stack.map((s) => <span key={s}>{s}</span>)}
                   </div>
-                  <div className="links" onClick={(e) => e.stopPropagation()}>
+                  <div className="links">
                     {p.github && (
                       <a href={p.github} target="_blank" rel="noopener noreferrer">github →</a>
                     )}
@@ -66,58 +42,31 @@ export default function Projects() {
                     )}
                   </div>
                 </div>
-              </article>
-            ))}
-          </div>
 
-          {/* ── Right: demo panel ── */}
-          <div className="demo-panel" data-reveal>
-            <div className="sec-head" style={{ marginBottom: '14px' }}>
-              <span className="prompt">›</span>
-              <span className="cmd">{demoLabel}</span>
-              {selected && (
-                <button className="demo-close" onClick={() => setSelected(null)} title="close">✕</button>
-              )}
-            </div>
-
-            <div className="demo-frame-wrap">
-              {!selected && (
-                <div className="demo-empty">
-                  <span className="pd">// click a project card to load its demo</span>
-                </div>
-              )}
-              {selected && isWeatherbot && (
-                <div className="demo-embed">
-                  <WeatherBotWidget />
-                </div>
-              )}
-              {selected && !isWeatherbot && !demoUrl && (
-                <div className="demo-empty">
-                  <span className="pd">// project not deployed publicly yet</span>
-                  {selected.github && (
-                    <a
-                      href={selected.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ marginTop: '10px', fontSize: '13px', color: 'var(--amber)', borderBottom: '1px solid var(--amber)', paddingBottom: '2px' }}
-                    >
-                      view source on github →
-                    </a>
+                <div className="demo-frame-wrap">
+                  {isWeatherbot && (
+                    <div className="demo-embed">
+                      <WeatherBotWidget />
+                    </div>
+                  )}
+                  {!isWeatherbot && !demoUrl && (
+                    <div className="demo-empty">
+                      <span className="pd">// project not deployed publicly yet</span>
+                    </div>
+                  )}
+                  {!isWeatherbot && demoUrl && (
+                    <iframe
+                      src={demoUrl}
+                      title={`${p.title} demo`}
+                      className="demo-iframe"
+                      loading="lazy"
+                      sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                    />
                   )}
                 </div>
-              )}
-              {selected && !isWeatherbot && demoUrl && (
-                <iframe
-                  key={demoUrl}
-                  src={demoUrl}
-                  title={`${selected.title} demo`}
-                  className="demo-iframe"
-                  loading="lazy"
-                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                />
-              )}
-            </div>
-          </div>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>
