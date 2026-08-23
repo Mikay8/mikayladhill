@@ -59,15 +59,9 @@
 
 .wb-cols {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 28px;
-}
-@media (max-width: 760px) {
-  .wb-cols {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 18px;
-  }
+  gap: 20px 28px;
 }
 
 .wb-col-divider {
@@ -75,10 +69,9 @@
   align-self: stretch;
   background: rgba(255, 255, 255, .14);
 }
-@media (max-width: 760px) {
+@media (max-width: 480px) {
   .wb-col-divider {
-    width: auto;
-    height: 1px;
+    display: none;
   }
 }
 
@@ -136,8 +129,8 @@
 .wb-wallet-pnl.dn { color: #e2938c; }
 
 .wb-history {
-  flex: 1;
-  min-width: 160px;
+  flex: 1 1 140px;
+  min-width: 0;
 }
 
 .wb-sparkline {
