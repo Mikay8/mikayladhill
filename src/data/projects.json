@@ -1,13 +1,12 @@
 [
   {
-    "id": "walletnewsbot",
-    "title": "Mikayla's Wallet News Bot",
-    "sub": "Automated financial news → narrated video pipeline · 2026 → now",
-    "description": "A fully automated content pipeline that turns daily financial news into short-form explainer videos. Pulls top stories via NewsMesh, uses Claude to score each one for 'wallet impact' (prices, interest rates, jobs, cost of living), generates a narrated script, converts it to speech with Fish Audio TTS, and assembles a video — optionally with an AI lip-synced avatar via Replicate — before publishing to YouTube. Nothing goes live without human approval: a password-gated admin dashboard lets a reviewer approve or reject each video, with a full audit trail and automatic S3 cleanup on rejection. Built solo across 4 deployed services — a Python pipeline worker, a FastAPI backend, an internal React/TypeScript admin dashboard (review queue, cost tracking, API call logs, scheduling settings), and a sanitized public-facing gallery — all on Postgres and Railway, with built-in per-call API cost tracking and observability.",
-    "stack": ["Python", "FastAPI", "React", "TypeScript", "Vite", "PostgreSQL", "Claude SDK", "Fish Audio", "Replicate", "YouTube Data API", "AWS S3", "Railway"],
-    "github": "https://github.com/Mikay8/mikaylas-content-bot",
-    "demo": "https://dashboard-public-web-production.up.railway.app",
-    "status": "building"
+    "id": "crrnt",
+    "title": "CRRNT",
+    "sub": "News + markets + AI insights, in your pocket · Apr 2026 → now",
+    "description": "A mobile app that makes trending news feel personal — every story is paired with a relevant stock ticker, live price chart, and Claude-generated breakdowns of what it actually means for your rent, job, and wallet. Categories span Celebrity, Tech, Government, Sports, Business, Science, and Entertainment. Audio playback is generated on-demand via Fish Audio TTS, with personalized scripts for paid subscribers based on their city, job type, and financial goals. Built solo — design, all frontend screens, and a FastAPI backend that handles daily ingestion (NewsMesh + X/Twitter sentiment via GetXAPI), Claude enrichment (claude-haiku-4-5), RevenueCat subscriptions, Supabase Auth + Postgres, push notifications, an investment simulator, and a Jinja2 admin portal.",
+    "stack": ["React Native", "Expo", "TypeScript", "FastAPI", "Python", "Claude SDK", "Supabase", "Fish Audio", "yfinance"],
+    "github": "https://github.com/Mikay8/CRRNT",
+    "demo": "https://web-production-a1d60.up.railway.app"
   },{
     "id": "weatherbot",
     "title": "Mikayla's Weather Bot",
