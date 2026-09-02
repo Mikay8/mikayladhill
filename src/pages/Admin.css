@@ -1,0 +1,83 @@
+.admin-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.admin-card {
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.admin-card-wide {
+  max-width: 480px;
+}
+
+.admin-card h1 {
+  margin-bottom: 1.5rem;
+}
+
+.admin-card h2 {
+  margin: 1.75rem 0 0.75rem;
+  font-size: 1rem;
+  text-align: left;
+}
+
+.admin-services {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: left;
+}
+
+.admin-services li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.admin-service-project {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.admin-form input {
+  padding: 0.65rem 0.85rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.admin-form button {
+  padding: 0.65rem 0.85rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.admin-error {
+  color: #c0392b;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.admin-logout {
+  margin-top: 1.5rem;
+}
