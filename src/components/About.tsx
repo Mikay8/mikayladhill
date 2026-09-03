@@ -1,5 +1,18 @@
 import './About.css';
 
+/**
+ * About section of the portfolio page.
+ *
+ * Renders the "02 — about" block: a terminal-style heading (`$ cat ~/about.md`)
+ * above a two-column grid containing a short bio on the left and a "now" panel
+ * on the right listing what I'm currently working on, studying, building, and
+ * making.
+ *
+ * Purely presentational — no props, state, or data fetching. The `data-reveal`
+ * attributes mark elements observed by the `useReveal` hook (which adds an `in`
+ * class once they scroll into view to trigger the fade-in animation), and
+ * all styling comes from the co-located About.css.
+ */
 export default function About() {
   return (
     <section id="about">
