@@ -1,3 +1,26 @@
+/**
+ * Contact.tsx — the "07 — say hi" contact section of the portfolio page.
+ *
+ * Instead of a plain contact form, this renders a fake bash terminal
+ * (`mikayla@portfolio:~$`) that visitors can actually type into.
+ *
+ * How it works:
+ *  - `lines` holds the terminal scrollback as a list of `Line` objects, each
+ *    rendered either as plain `text` or as pre-formatted `html` (used for the
+ *    syntax-highlighting spans: .pa/.pw/.pp/.pr/.pd).
+ *  - `COMMANDS` maps a typed command to the output lines it produces —
+ *    help, whoami, socials, resume (triggers a PDF download), the `sudo hire me`
+ *    easter egg, and clear (wipes the scrollback).
+ *  - `ask <question>` is handled separately by `renderAsk`, which keyword-matches
+ *    the question and replies with a canned answer, falling back to an email prompt.
+ *  - `run` echoes the typed command back as an input line, appends the command's
+ *    output, and records the entry in `history`; ArrowUp/ArrowDown walk that
+ *    history like a real shell. A `useEffect` auto-scrolls to the newest line.
+ *
+ * Note: command output is injected with `dangerouslySetInnerHTML`, which is safe
+ * here only because every html string is authored in this file — user input is
+ * interpolated in `renderAsk`'s fallback and in the "command not found" line.
+ */
 import { useState, useRef, useEffect, type KeyboardEvent } from 'react';
 import './Contact.css';
 
