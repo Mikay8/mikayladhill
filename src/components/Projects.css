@@ -133,3 +133,9 @@ a.cs-cover:hover .slot { filter: brightness(.96); }
   background: var(--green);
   box-shadow: 0 0 5px var(--green);
 }
+.pill-school {
+  background: rgba(91, 63, 217, .1);
+  border-color: var(--purple);
+  color: var(--purple);
+}
+.pill-school::before { background: var(--purple); }

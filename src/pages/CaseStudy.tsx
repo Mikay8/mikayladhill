@@ -1,18 +1,20 @@
 import { useEffect, useState } from 'react';
 import { Link, Navigate, useLocation, useParams } from 'react-router-dom';
-import { caseStudies, findCaseStudy, CASE_SECTIONS, type CaseStudy as CS, type Exploration } from '../data/caseStudies';
+import { caseStudies, findCaseStudy, caseSections, type CaseStudy as CS, type Exploration } from '../data/caseStudies';
 import { ImageSlot, Window } from '../components/ImageSlot';
 import CrrntPrototype from '../components/CrrntPrototype';
 import CrrntBrand from '../components/CrrntBrand';
 import WireframeSets from '../components/WireframeSets';
+import { ConceptTest, ResearchFindings, Results } from '../components/Research';
 import { useReveal } from '../hooks/useReveal';
 import './CaseStudy.css';
 
-function useActiveSection() {
+function useActiveSection(ids: string[]) {
   const [active, setActive] = useState('');
+  const key = ids.join();
   useEffect(() => {
     const onScroll = () => {
-      for (const { id } of [...CASE_SECTIONS].reverse()) {
+      for (const id of [...key.split(',')].reverse()) {
         const el = document.getElementById(id);
         if (el && el.getBoundingClientRect().top <= 120) {
           setActive(id);
@@ -24,7 +26,7 @@ function useActiveSection() {
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  }, [key]);
   return active;
 }
 
@@ -72,6 +74,19 @@ function Gallery({ items }: { items: Exploration[] }) {
 
 function Prototype({ c }: { c: CS }) {
   if (c.prototype.demo === 'crrnt') return <CrrntPrototype />;
+  if (c.prototype.demo === 'video' && c.prototype.video) {
+    return (
+      <Window title={`youtube.com/watch?v=${c.prototype.video}`} className="csp-video">
+        <iframe
+          src={`https://www.youtube-nocookie.com/embed/${c.prototype.video}`}
+          title={`${c.title} prototype walkthrough`}
+          loading="lazy"
+          allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+          allowFullScreen
+        />
+      </Window>
+    );
+  }
   if (!c.live) return null;
   return (
     <Window title={c.live.replace(/^https?:\/\//, '')} className="csp-browser">
@@ -89,7 +104,8 @@ export default function CaseStudy() {
   const { slug } = useParams();
   const { hash } = useLocation();
   const c = findCaseStudy(slug);
-  const active = useActiveSection();
+  const sections = c ? caseSections(c) : [];
+  const active = useActiveSection(sections.map((s) => s.id));
   useReveal();
 
   useEffect(() => {
@@ -106,6 +122,9 @@ export default function CaseStudy() {
   const index = caseStudies.indexOf(c);
   const next = caseStudies[(index + 1) % caseStudies.length];
   const hasTokens = Boolean(c.colors?.length || c.type?.length);
+  const wideDemo = c.prototype.demo !== 'crrnt';
+  // Section numbers follow whichever optional sections this project has.
+  const num = (id: string) => sections.findIndex((s) => s.id === id) + 1;
 
   return (
     <div className="csp">
@@ -116,7 +135,7 @@ export default function CaseStudy() {
             ← <b>mikayla@portfolio</b>:~/projects/{c.slug}
           </Link>
           <span className="csp-links">
-            {CASE_SECTIONS.map((s) => (
+            {sections.map((s) => (
               <a key={s.id} href={`#${s.id}`} className={active === s.id ? 'is-active' : ''}>
                 {s.label}
               </a>
@@ -129,19 +148,26 @@ export default function CaseStudy() {
         <div className="csp-open">
           <span className="prompt">$</span> open <b>~/projects/{String(index + 1).padStart(2, '0')}-{c.slug}</b>
         </div>
-        <h1>{c.title}<span className="csp-dot" /></h1>
+        {c.school && (
+          <div className="csp-school"><span className="pill pill-school">School project</span> {c.school}</div>
+        )}
+        <h1>
+          {c.title.split(' ').slice(0, -1).join(' ')}{' '}
+          {/* keep the dot on the same line as the last word */}
+          <span className="csp-nowrap">{c.title.split(' ').pop()}<span className="csp-dot" /></span>
+        </h1>
         <p className="csp-lede">{c.blurb}</p>
 
         <dl className="csp-meta">
           <div><dt>Role</dt><dd>{c.role}</dd></div>
           <div><dt>Timeline</dt><dd>{c.timeline}</dd></div>
           <div><dt>Platform</dt><dd>{c.platform}</dd></div>
-          <div><dt>Stack</dt><dd>{c.stack.join(' · ')}</dd></div>
+          <div><dt>{c.stackLabel ?? 'Stack'}</dt><dd>{c.stack.join(' · ')}</dd></div>
         </dl>
 
         <div className="csp-ctas">
           <a href="#prototype" className="csp-btn csp-btn-dark">
-            {c.prototype.demo === 'iframe' ? 'see it live ↓' : 'try the prototype ↓'}
+            {{ iframe: 'see it live ↓', video: 'watch the walkthrough ↓', crrnt: 'try the prototype ↓' }[c.prototype.demo]}
           </a>
           {c.github && (
             <a href={c.github} target="_blank" rel="noopener noreferrer" className="csp-btn">github →</a>
@@ -158,7 +184,7 @@ export default function CaseStudy() {
 
       <section id="problem" className="csp-sec">
         <div className="wrap">
-          <SecHead n={1} cmd="cat problem.md" tag="problem / context" />
+          <SecHead n={num('problem')} cmd="cat problem.md" tag="problem / context" />
           <div className="csp-problem" data-reveal>
             <h2><Highlight text={c.problem.headline} mark={c.problem.highlight} /></h2>
             <div>
@@ -172,9 +198,18 @@ export default function CaseStudy() {
         </div>
       </section>
 
+      {c.research && (
+        <section id="research" className="csp-sec">
+          <div className="wrap">
+            <SecHead n={num('research')} cmd="cat research/*.csv" tag="needfinding" />
+            <ResearchFindings r={c.research} />
+          </div>
+        </section>
+      )}
+
       <section id="wireframes" className="csp-sec">
         <div className="wrap">
-          <SecHead n={2} cmd="ls ./wireframes" tag={c.wireframesTag ?? 'sketches → low-fi'} />
+          <SecHead n={num('wireframes')} cmd="ls ./wireframes" tag={c.wireframesTag ?? 'sketches → low-fi'} />
           {c.wireframes.length > 0 && <div className="csp-shots" data-reveal>
             {c.wireframes.map((s, i) => (
               <figure key={s.label}>
@@ -195,24 +230,25 @@ export default function CaseStudy() {
           )}
           {c.wireframeSets && <WireframeSets sets={c.wireframeSets} />}
           {c.explorations && <Gallery items={c.explorations} />}
+          {c.conceptTest && <ConceptTest t={c.conceptTest} />}
         </div>
       </section>
 
       <section id="visual-design" className="csp-sec">
         <div className="wrap">
-          <SecHead n={3} cmd="open ./ui" tag="visual design" />
+          <SecHead n={num('visual-design')} cmd="open ./ui" tag="visual design" />
           {c.brand?.mark === 'crrnt' && (
             <div data-reveal><CrrntBrand colors={c.brand.colors} /></div>
           )}
           {c.brandGallery && <Gallery items={c.brandGallery} />}
-          <div className="csp-phones" data-reveal>
+          {c.screens.length > 0 && <div className="csp-phones" data-reveal>
             {c.screens.map((s, i) => (
               <figure key={s.label}>
                 <ImageSlot shot={s} className="csp-phone" />
                 <figcaption><span className="num">{String.fromCharCode(65 + i)}</span> {s.caption}</figcaption>
               </figure>
             ))}
-          </div>
+          </div>}
           {c.desktopScreens && <Gallery items={c.desktopScreens} />}
 
           {hasTokens && (
@@ -259,8 +295,12 @@ export default function CaseStudy() {
 
       <section id="prototype" className="csp-sec">
         <div className="wrap">
-          <SecHead n={4} cmd={`./${c.slug} --demo`} tag={c.prototype.demo === 'iframe' ? 'live build' : 'interactive prototype'} />
-          <div className={`csp-proto ${c.prototype.demo === 'iframe' ? 'csp-proto-wide' : ''}`}>
+          <SecHead
+            n={num('prototype')}
+            cmd={`./${c.slug} --demo`}
+            tag={{ iframe: 'live build', video: 'prototype walkthrough', crrnt: 'interactive prototype' }[c.prototype.demo]}
+          />
+          <div className={`csp-proto ${wideDemo ? 'csp-proto-wide' : ''}`}>
             <div className="csp-proto-copy">
               <h2>{c.prototype.headline}</h2>
               <p>{c.prototype.body}</p>
@@ -270,6 +310,15 @@ export default function CaseStudy() {
           </div>
         </div>
       </section>
+
+      {c.results && (
+        <section id="results" className="csp-sec">
+          <div className="wrap">
+            <SecHead n={num('results')} cmd="cat evaluation.md" tag="final evaluation" />
+            <Results r={c.results} />
+          </div>
+        </section>
+      )}
 
       <section className="csp-sec csp-next">
         <div className="wrap">

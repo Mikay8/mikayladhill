@@ -41,8 +41,58 @@ export interface TypeToken {
   tracking?: string;
 }
 
+export interface BarChart {
+  title: string;
+  note: string;
+  items: { label: string; pct: number; display: string }[]; // pct = bar length, 0–100
+}
+
+export interface Distribution {
+  label: string;
+  mean: string;
+  counts: number[]; // responses for each score, 0 → 10
+}
+
+export interface Research {
+  intro: string;
+  methods: { value: string; label: string; note: string }[];
+  heuristics?: { app: string; src: string; source: string; notes: { label: string; text: string }[] }[];
+  interviews?: { title: string; points: string[] };
+  insights: { stat: string; title: string; body: string }[];
+  charts?: BarChart[];
+  distributions?: { title: string; note: string; series: Distribution[] };
+}
+
+export interface Concept {
+  name: string;
+  src: string;
+  idea: string;
+  score: number; // mean likelihood to use, out of 10
+  picks: number; // participants who chose it as their favorite
+  liked: string;
+  disliked: string;
+}
+
+export interface ConceptTest {
+  intro: string;
+  participants: number;
+  concepts: Concept[];
+  stats: string;
+  outcome: string;
+  carried: string[];
+}
+
+export interface Results {
+  score: string;
+  scoreLabel: string;
+  intro: string;
+  findings: { title: string; body: string }[];
+  next: string[];
+}
+
 export interface CaseStudy {
   slug: string;
+  school?: string; // set for coursework; shows a "school project" badge
   title: string;
   kind: string;
   years: string;
@@ -51,6 +101,7 @@ export interface CaseStudy {
   timeline: string;
   platform: string;
   stack: string[];
+  stackLabel?: string; // meta label for `stack`, defaults to 'Stack'
   github?: string;
   live?: string;
   cover: Shot;
@@ -60,7 +111,9 @@ export interface CaseStudy {
     body: string[];
     goals: string[];
   };
+  research?: Research; // adds a research section after the problem
   wireframes: Shot[];
+  conceptTest?: ConceptTest; // concept testing results, shown in the wireframes section
   wireframesTag?: string; // section subtitle, defaults to 'sketches → low-fi'
   wireframeDemo?: string; // clickable lo-fi prototype, embedded under the stills
   wireframeSets?: WireframeSet[]; // full wireframe set, tabbed by role
@@ -75,8 +128,10 @@ export interface CaseStudy {
     headline: string;
     body: string;
     note?: string;
-    demo: 'crrnt' | 'iframe';
+    demo: 'crrnt' | 'iframe' | 'video';
+    video?: string; // YouTube id for demo: 'video'
   };
+  results?: Results; // adds a results section after the prototype
 }
 
 export const caseStudies: CaseStudy[] = [
@@ -398,16 +453,268 @@ export const caseStudies: CaseStudy[] = [
       demo: 'iframe',
     },
   },
+  {
+    slug: 'beyond-the-swipe',
+    school: 'Georgia Tech · Human-Computer Interaction',
+    title: 'Beyond the Swipe',
+    kind: 'HCI research',
+    years: '2025',
+    blurb:
+      'A school project for my Human-Computer Interaction course at Georgia Tech: redesigning the dating profile so people read who someone is before they decide, backed by interviews, a survey and two rounds of testing.',
+    role: 'Solo: research, design, testing',
+    timeline: 'One semester · 2025',
+    platform: 'Mobile concept',
+    stack: ['Interviews', 'Survey', 'Heuristic eval', 'Usability testing', 'Figma'],
+    stackLabel: 'Methods',
+    cover: {
+      label: 'Beyond the Swipe cover image',
+      caption: 'beyond-the-swipe-cover.jpg',
+      src: '/case-studies/beyond-the-swipe/cover.jpg',
+      compactSrc: '/case-studies/beyond-the-swipe/cover-compact.jpg',
+    },
+    problem: {
+      headline: 'Swipe apps reward a split-second judgment on a photo.',
+      highlight: 'split-second judgment',
+      body: [
+        'Swipe-based dating apps are built for speed: a big photo, a yes-or-no gesture, then the next profile. That makes it easy to judge on looks alone and hard to find anything to talk about, so matches stall or fade out.',
+        'For my individual project in Georgia Tech’s Human-Computer Interaction course, I focused on one task: looking through a profile and deciding whether to like it. I ran needfinding, built three lo-fi concepts, tested them, and combined the strongest ideas into a final prototype.',
+      ],
+      goals: [
+        'Get people to spend more time on a profile before they decide',
+        'Put personality and shared interests up front, next to the photos',
+        'Give people something specific to open with, so fewer matches go quiet',
+        'Keep the controls familiar to anyone who has used a swipe app',
+      ],
+    },
+    research: {
+      intro:
+        'I started by evaluating the three biggest apps, then interviewed five people while they walked me through how they read a profile, and used what came up to write a survey.',
+      methods: [
+        { value: '3', label: 'apps evaluated', note: 'Tinder, Bumble and Hinge, for consistency, affordance and tolerance' },
+        { value: '5', label: 'interviews', note: 'Each with a walkthrough of how they read a profile' },
+        { value: '23', label: 'survey responses', note: 'What drives a like, how long it takes, what goes wrong' },
+        { value: '10', label: 'test sessions', note: 'Five rating three concepts, five walking through the final prototype' },
+      ],
+      heuristics: [
+        {
+          app: 'Tinder',
+          src: '/case-studies/beyond-the-swipe/heuristic-tinder.jpg',
+          source: 'tinder.com',
+          notes: [
+            { label: 'Consistency', text: 'Sets the standard: right to like, left to pass, up to super like. Interests sit far below the photo.' },
+            { label: 'Affordance', text: 'Strong: carousel dashes and icon buttons. Boost and undo still need explaining.' },
+            { label: 'Tolerance', text: 'Undo exists, but it’s paywalled and only works on passes.' },
+          ],
+        },
+        {
+          app: 'Bumble',
+          src: '/case-studies/beyond-the-swipe/heuristic-bumble.jpg',
+          source: 'bumble.com',
+          notes: [
+            { label: 'Consistency', text: 'Same swipe gestures, but it leads with job and education, then bio, photos and prompts.' },
+            { label: 'Affordance', text: 'Weaker: it assumes you already know the swipe directions. A star marks the super swipe.' },
+            { label: 'Tolerance', text: 'Paywalled undo, passes only.' },
+          ],
+        },
+        {
+          app: 'Hinge',
+          src: '/case-studies/beyond-the-swipe/heuristic-hinge.jpg',
+          source: 'hinge.co',
+          notes: [
+            { label: 'Consistency', text: 'Photo first like the others, but no age or job up top. Prompts and photos alternate.' },
+            { label: 'Affordance', text: 'Good: every like and message button carries an icon.' },
+            { label: 'Tolerance', text: 'Best of the three, with undo for passes, but still none for likes.' },
+          ],
+        },
+      ],
+      interviews: {
+        title: 'What the interviews showed',
+        points: [
+          'Every walkthrough started at the photo, and most ended by going back to it before deciding.',
+          'Most people decided in 30 seconds or less.',
+          'All five described feeling disappointed, discouraged or hopeless after using the apps for a while.',
+          'Boring profiles were a common complaint: one-word prompt answers, half-empty bios, photos that didn’t match the person.',
+        ],
+      },
+      insights: [
+        {
+          stat: '57%',
+          title: 'decide in under 30 seconds',
+          body: '13 of 23 respondents spend 0–30 seconds on a profile before sending a like. Only two spend more than a minute.',
+        },
+        {
+          stat: '8.4 vs 7.3',
+          title: 'personality beats looks, until you watch what people do',
+          body: 'Asked directly, people rated personality (8.4/10) above attractiveness (7.3/10). Asked to rank what actually drives a like, they put profile photos first. The layout leads with the photo, so the photo decides.',
+        },
+        {
+          stat: '78%',
+          title: 'name ghosting or poor communication',
+          body: '18 of 23 chose it as a frustration, ahead of a lack of matches (61%) and superficial profiles (52%).',
+        },
+        {
+          stat: '82%',
+          title: 'say matches rarely or never become meaningful',
+          body: '18 of the 22 people who answered. Most also get fewer than five in-person dates a month from the apps.',
+        },
+      ],
+      charts: [
+        {
+          title: 'What influences a like the most',
+          note: 'Mean rank out of 6, where 1 = most influential (n = 23)',
+          items: [
+            { label: 'Profile photo', pct: 75, display: '2.26' },
+            { label: 'Shared interests', pct: 62, display: '2.91' },
+            { label: 'Bio', pct: 53, display: '3.35' },
+            { label: 'Age', pct: 48, display: '3.61' },
+            { label: 'Location', pct: 38, display: '4.09' },
+            { label: 'Height', pct: 24, display: '4.78' },
+          ],
+        },
+        {
+          title: 'Biggest frustrations',
+          note: 'Share of respondents, select all that apply (n = 23)',
+          items: [
+            { label: 'Poor communication / ghosting', pct: 78, display: '78%' },
+            { label: 'Lack of matches', pct: 61, display: '61%' },
+            { label: 'Superficial', pct: 52, display: '52%' },
+            { label: 'Time-consuming', pct: 35, display: '35%' },
+            { label: 'Overwhelmed by choice', pct: 17, display: '17%' },
+          ],
+        },
+      ],
+      distributions: {
+        title: 'How important is it when deciding to like a profile?',
+        note: 'Responses on a 0–10 scale (n = 23)',
+        series: [
+          { label: 'Attractiveness', mean: '7.3', counts: [0, 0, 1, 0, 0, 0, 2, 8, 9, 3, 0] },
+          { label: 'Personality', mean: '8.4', counts: [0, 0, 0, 1, 0, 2, 0, 2, 3, 8, 7] },
+        ],
+      },
+    },
+    wireframes: [],
+    wireframesTag: 'three concepts → testing',
+    conceptTest: {
+      intro:
+        'With help from a brainstorm in ChatGPT, I sketched three lo-fi concepts in Figma, each attacking a different finding. Five people who use dating apps rated each one and told me what they liked and didn’t.',
+      participants: 5,
+      concepts: [
+        {
+          name: 'Personality snapshots',
+          src: '/case-studies/beyond-the-swipe/concept-snapshots.jpg',
+          idea: 'Smaller photos inline with text, like a social profile, so no single photo dominates.',
+          score: 5.4,
+          picks: 1,
+          liked: '“I like that you are forced to see multiple photos in one screen, so it reduces quick swipe-ability.”',
+          disliked: '4 of 5 said it felt cluttered or congested.',
+        },
+        {
+          name: 'Video first',
+          src: '/case-studies/beyond-the-swipe/concept-video.jpg',
+          idea: 'A full-screen video intro, then interests and prompts.',
+          score: 6.4,
+          picks: 3,
+          liked: '“Video of the person gives you a better sense of their personality.”',
+          disliked: '2 of 5 wanted more information on the opening screen.',
+        },
+        {
+          name: 'Mutual interests',
+          src: '/case-studies/beyond-the-swipe/concept-mutual.jpg',
+          idea: 'Opens with what you have in common, then the photo, then prompts.',
+          score: 7.4,
+          picks: 1,
+          liked: '“I like the this is what you have in common section, it helps for conversation starters.”',
+          disliked: 'One participant worried about too much text.',
+        },
+      ],
+      stats:
+        'A one-way ANOVA found no significant difference between the three scores (F = 0.20, p = 0.82). With five participants that isn’t surprising, so I treated the scores as a direction rather than a verdict and leaned on what people said.',
+      outcome:
+        'Mutual interests scored highest, but video first was the favorite. People wanted both: something visual to pull them in, and something to talk about.',
+      carried: [
+        'The large media box from video first',
+        'Mutual interests pinned to the top',
+        'Structured blocks of text and images from snapshots',
+      ],
+    },
+    screens: [],
+    desktopScreens: [
+      {
+        file: 'profile.fig',
+        title: 'Profile: opening screen and the scroll',
+        caption:
+          'Mutual interests sit above the photo, so the first thing you read is what you share. The photo is a single media box, not a carousel, which nudges you to scroll. Below it, bio, info, prompts and photos alternate, and every text block has its own comment button. Comment replaces like, so every like starts a conversation.',
+        src: '/case-studies/beyond-the-swipe/final-profile.jpg',
+      },
+      {
+        file: 'message.fig',
+        title: 'Messaging: a suggested opener, or your own words',
+        caption:
+          'A suggested opener based on a shared interest makes it easier to start. Writing your own takes at least three words, so “hey” isn’t an option. A clear confirmation shows the message went through.',
+        src: '/case-studies/beyond-the-swipe/final-message.jpg',
+      },
+    ],
+    colors: [
+      { name: 'Card', hex: '#3B414A' },
+      { name: 'Modal', hex: '#50565F' },
+      { name: 'Input', hex: '#26252A' },
+      { name: 'Pass', hex: '#4D3A38' },
+      { name: 'Comment', hex: '#324832' },
+      { name: 'Suggested', hex: '#76B2F9' },
+      { name: 'Sent', hex: '#65C366' },
+    ],
+    prototype: {
+      headline: 'Walk through it.',
+      body: 'A video walkthrough of the final Figma prototype: the opening screen, the scroll into the full profile, and sending a message.',
+      note: 'Profile images were AI-generated with ChatGPT for the prototype.',
+      demo: 'video',
+      video: 'tUVzEoF3fPI',
+    },
+    results: {
+      score: '7.8',
+      scoreLabel: 'average likelihood to use, out of 10 (n = 5)',
+      intro:
+        'Five more people, some who use dating apps and some who don’t, walked through the prototype while thinking aloud, then answered questions about each screen. Ratings ranged from 6 to 10.',
+      findings: [
+        {
+          title: 'Familiar controls, nothing to learn',
+          body: 'All five found the controls intuitive. The icons and colors (a red X to pass, a green comment to message) matched what they knew from other apps.',
+        },
+        {
+          title: 'Mutual interests pulled people in',
+          body: 'The shared-interest banner at the top was the feature people mentioned most for making them read further.',
+        },
+        {
+          title: 'The three-word minimum made people read',
+          body: 'Because a message needs real words, participants read the prompts first so they’d have something to say.',
+        },
+        {
+          title: 'The up arrow didn’t say “more info”',
+          body: '2 of 5 weren’t sure what it did. It’s the clearest fix for another round.',
+        },
+      ],
+      next: [
+        'Label the up-arrow button, or let scrolling do the work',
+        'Test with a larger and more varied group: everyone here was a friend or classmate, close in age and mostly in one metro area',
+        'Measure real time on a profile in a working build instead of self-reported time',
+        'Alternate text and images more evenly, as one participant suggested',
+      ],
+    },
+  },
 ];
 
 export function findCaseStudy(slug: string | undefined) {
   return caseStudies.find((c) => c.slug === slug);
 }
 
-// Section tags shown on project cards; mirror the case study page sections.
-export const CASE_SECTIONS = [
-  { id: 'problem', label: 'problem' },
-  { id: 'wireframes', label: 'wireframes' },
-  { id: 'visual-design', label: 'visual design' },
-  { id: 'prototype', label: 'prototype' },
-] as const;
+// Sections on a case study page, also used as the tags on its project card.
+export function caseSections(c: CaseStudy) {
+  return [
+    { id: 'problem', label: 'problem' },
+    ...(c.research ? [{ id: 'research', label: 'research' }] : []),
+    { id: 'wireframes', label: 'wireframes' },
+    { id: 'visual-design', label: 'visual design' },
+    { id: 'prototype', label: 'prototype' },
+    ...(c.results ? [{ id: 'results', label: 'results' }] : []),
+  ];
+}

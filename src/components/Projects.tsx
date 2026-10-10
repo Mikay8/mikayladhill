@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import './Projects.css';
 import projects from '../data/projects.json';
-import { caseStudies, CASE_SECTIONS } from '../data/caseStudies';
+import { caseStudies, caseSections } from '../data/caseStudies';
 import { ImageSlot, Window } from './ImageSlot';
 import WeatherBotWidget from './WeatherBotWidget';
 
@@ -29,14 +29,14 @@ export default function Projects() {
                   <span className="num">{String(i + 1).padStart(2, '0')}</span>
                   <span>{c.kind}</span>
                   <span>{c.years}</span>
-                  <span>Design + build</span>
+                  {c.school ? <span className="pill pill-school">School project</span> : <span>Design + build</span>}
                 </div>
                 <h3>{c.title}</h3>
                 <p>{c.blurb}</p>
                 <div className="cs-tags">
-                  {CASE_SECTIONS.map((s) => (
+                  {caseSections(c).map((s) => (
                     <Link key={s.id} to={`/projects/${c.slug}#${s.id}`}>
-                      {s.id === 'prototype' ? `live ${s.label}` : s.label}
+                      {s.id === 'prototype' && c.prototype.demo !== 'video' ? `live ${s.label}` : s.label}
                     </Link>
                   ))}
                 </div>
