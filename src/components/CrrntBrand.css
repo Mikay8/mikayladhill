@@ -1,0 +1,70 @@
+.brand-win { margin-bottom: 48px; }
+.brand-body {
+  background: #090d12;
+  color: #eef8ff;
+  padding: 40px;
+  font-family: Inter, -apple-system, sans-serif;
+}
+.brand-hero {
+  display: flex;
+  justify-content: center;
+  padding: 48px 0 56px;
+  border-bottom: 1px solid #1e3048;
+  margin-bottom: 32px;
+}
+.brand-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11.5px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: #7098b4;
+  margin-bottom: 16px;
+}
+.brand-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 56px;
+  margin-bottom: 36px;
+}
+.brand-body figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.brand-body figcaption { font-size: 12px; color: #7098b4; text-align: center; }
+.brand-scale { display: flex; align-items: flex-end; gap: 28px; height: 104px; }
+.brand-icons { display: flex; gap: 24px; flex-wrap: wrap; }
+.brand-icon {
+  width: 88px;
+  height: 88px;
+  border-radius: 22px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #1e3048;
+}
+.brand-palette {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+}
+.brand-palette > div {
+  border: 1px solid #1e3048;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #101820;
+  font-size: 12.5px;
+}
+.brand-palette i { display: block; height: 56px; }
+.brand-palette b, .brand-palette span { display: block; padding: 0 12px; }
+.brand-palette b { padding-top: 10px; font-weight: 600; }
+.brand-palette span { padding-bottom: 10px; color: #7098b4; font-family: "JetBrains Mono", monospace; font-size: 11.5px; }
+
+@media (max-width: 860px) {
+  .brand-body { padding: 24px; }
+  .brand-hero { padding: 24px 0 32px; }
+  .brand-hero .crrnt-lockup { transform: scale(.6); }
+  .brand-row { grid-template-columns: 1fr; gap: 32px; }
+  .brand-palette { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 480px) {
+  .brand-scale { gap: 16px; }
+  .brand-icon { width: 64px; height: 64px; border-radius: 16px; }
+  .brand-icon svg { width: 38px; height: 38px; }
+  .brand-palette { grid-template-columns: repeat(2, 1fr); }
+}

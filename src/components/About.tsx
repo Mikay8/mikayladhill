@@ -39,7 +39,7 @@ export default function About() {
             <h4>~/.now.txt — last updated this week</h4>
             <ul>
               <li><b>day-job</b><span>shipping a React refactor of a trade-settlement screen used across the firm.</span></li>
-              <li><b>studying</b><span>Artificial Intelligence · Georgia Tech OMSCS.</span></li>
+              <li><b>studying</b><span>Human Computer Interaction · Georgia Tech OMSCS.</span></li>
               <li><b>building</b><span>CRRNT — news app for everyday people.</span></li>
               <li><b>making</b><span>a quilt that i keep promising to finish.</span></li>
             </ul>

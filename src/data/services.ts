@@ -8,6 +8,11 @@ export const services: ServiceLink[] = [
   { project: 'mikayladhill', service: 'Site', url: 'https://mikayladhill.com' },
   { project: 'crrnt-app', service: 'Web', url: 'https://web-production-a1d60.up.railway.app' },
   {
+    project: 'crrnt-app',
+    service: 'API Admin',
+    url: 'https://api-server-production-1079.up.railway.app/admin/dashboard',
+  },
+  {
     project: 'mikaylas-weather-bot',
     service: 'Web demo',
     url: 'https://web-demo-production-f7a9.up.railway.app',

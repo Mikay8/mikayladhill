@@ -1,0 +1,84 @@
+.wfs { margin-top: 80px; }
+.wfs-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.wfs-count { font-size: 13px; color: var(--ink-3); }
+
+.wfs-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+  margin-bottom: 36px;
+}
+.wfs-tabs::-webkit-scrollbar { display: none; }
+.wfs-tabs button {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background .15s, color .15s;
+}
+.wfs-tabs button small { font-size: 11px; color: var(--ink-3); }
+.wfs-tabs button:hover { background: var(--paper-2); }
+.wfs-tabs button.on { background: var(--ink); color: var(--paper); }
+.wfs-tabs button.on small { color: var(--term-dim); }
+
+.wfs-sub {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin: 0 0 18px;
+  font-size: 14px;
+}
+.wfs-sub b { font-weight: 600; }
+.wfs-sub span { color: var(--ink-3); }
+
+.wfs-panel figure { margin: 0; }
+.wfs-panel img { display: block; width: 100%; height: auto; }
+.wfs-panel figcaption { margin-top: 10px; font-size: 13px; color: var(--ink-2); }
+.wfs-panel a:hover img { filter: brightness(.97); }
+
+/* Phones scroll sideways so a role with 8 screens doesn't wrap into a wall. */
+.wfs-phones {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 220px;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 4px 4px 18px;
+  margin-bottom: 48px;
+}
+.wfs-phones figure { scroll-snap-align: start; }
+.wfs-phones img { filter: drop-shadow(5px 5px 0 var(--ink)); }
+
+.wfs-desktops {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px 28px;
+}
+.wfs-desktops img {
+  border: 1px solid var(--ink);
+  border-radius: 6px;
+  box-shadow: 5px 5px 0 var(--ink);
+}
+
+@media (max-width: 760px) {
+  .wfs-phones { grid-auto-columns: 180px; gap: 18px; }
+  .wfs-desktops { grid-template-columns: minmax(0, 1fr); }
+}

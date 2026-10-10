@@ -1,0 +1,60 @@
+/* ── Window chrome ── */
+.win {
+  background: var(--paper-2);
+  border: 1px solid var(--ink);
+  border-radius: 8px;
+  box-shadow: 8px 8px 0 var(--ink);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.win-chrome {
+  background: var(--ink);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--term-dim);
+  font-size: 13px;
+}
+.win-chrome i { width: 12px; height: 12px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+.win-chrome i:nth-child(1) { background: #ed6a5e; }
+.win-chrome i:nth-child(2) { background: #f4bf4f; }
+.win-chrome i:nth-child(3) { background: #62c655; }
+.win-chrome span {
+  margin-left: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.win-body { flex: 1; display: flex; flex-direction: column; }
+
+/* ── Image slot ── */
+.slot {
+  position: relative;
+  background: #e4dccf;
+  overflow: hidden;
+}
+.slot picture { display: contents; }
+.slot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.slot-empty {
+  position: absolute;
+  inset: 0;
+  border: 1px dashed var(--ink-3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px;
+  text-align: center;
+  color: var(--ink-3);
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
+  font-size: 15px;
+}
+.slot-empty span { color: var(--ink-2); }
