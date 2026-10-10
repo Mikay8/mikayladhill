@@ -16,7 +16,7 @@ function Home() {
   useReveal();
   const { hash } = useLocation();
 
-  // Router navigation (e.g. back from a case study) doesn't scroll to the hash on its own.
+  // Router navigation (e.g. back from a project page) doesn't scroll to the hash on its own.
   useEffect(() => {
     if (hash) document.getElementById(hash.slice(1))?.scrollIntoView();
   }, [hash]);

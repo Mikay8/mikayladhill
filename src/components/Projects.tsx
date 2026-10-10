@@ -5,7 +5,7 @@ import { caseStudies, CASE_SECTIONS } from '../data/caseStudies';
 import { ImageSlot, Window } from './ImageSlot';
 import WeatherBotWidget from './WeatherBotWidget';
 
-// Projects that don't have a case study yet still get a card.
+// Projects without a detail page still get a card.
 const otherProjects = projects.filter((p) => !caseStudies.some((c) => c.slug === p.id));
 
 export default function Projects() {
@@ -14,14 +14,14 @@ export default function Projects() {
       <div className="wrap">
         <div className="sec-head">
           <span className="prompt">$</span>
-          <span className="cmd">ls -la ~/case-studies</span>
+          <span className="cmd">ls -la ~/projects</span>
           <span className="tag">// 04 — projects</span>
         </div>
 
         <div className="cs-grid" data-reveal>
           {caseStudies.map((c, i) => (
-            <Window key={c.slug} title={`~/case-studies/${c.slug}`} className="cs-card">
-              <Link to={`/case-studies/${c.slug}`} className="cs-cover" aria-label={`${c.title} case study`}>
+            <Window key={c.slug} title={`~/projects/${c.slug}`} className="cs-card">
+              <Link to={`/projects/${c.slug}`} className="cs-cover" aria-label={`View ${c.title}`}>
                 <ImageSlot shot={c.cover} compact />
               </Link>
               <div className="cs-info">
@@ -35,7 +35,7 @@ export default function Projects() {
                 <p>{c.blurb}</p>
                 <div className="cs-tags">
                   {CASE_SECTIONS.map((s) => (
-                    <Link key={s.id} to={`/case-studies/${c.slug}#${s.id}`}>
+                    <Link key={s.id} to={`/projects/${c.slug}#${s.id}`}>
                       {s.id === 'prototype' ? `live ${s.label}` : s.label}
                     </Link>
                   ))}
@@ -46,7 +46,7 @@ export default function Projects() {
                   ) : c.github ? (
                     <a href={c.github} target="_blank" rel="noopener noreferrer" className="cs-ext">github</a>
                   ) : <span />}
-                  <Link to={`/case-studies/${c.slug}`} className="cs-btn">read case study →</Link>
+                  <Link to={`/projects/${c.slug}`} className="cs-btn">view project →</Link>
                 </div>
               </div>
             </Window>

@@ -283,3 +283,4 @@
 .csp-gallery figcaption { margin-top: 22px; display: flex; flex-direction: column; gap: 6px; max-width: 72ch; }
 .csp-gallery figcaption b { font-size: 16px; }
 .csp-gallery figcaption span { color: var(--ink-2); font-size: 15px; line-height: 1.7; }
+.csp-sec-head + .csp-gallery { margin-top: 0; }

@@ -94,7 +94,7 @@ export default function CaseStudy() {
 
   useEffect(() => {
     if (!c) return;
-    document.title = `${c.title} case study — Mikayla Hill`;
+    document.title = `${c.title} — Mikayla Hill`;
     const el = hash ? document.getElementById(hash.slice(1)) : null;
     if (el) el.scrollIntoView();
     else window.scrollTo(0, 0);
@@ -113,7 +113,7 @@ export default function CaseStudy() {
         <div className="csp-bar-row">
           <span className="csp-dots"><i /><i /><i /></span>
           <Link to="/#projects" className="csp-crumb">
-            ← <b>mikayla@portfolio</b>:~/case-studies/{c.slug}
+            ← <b>mikayla@portfolio</b>:~/projects/{c.slug}
           </Link>
           <span className="csp-links">
             {CASE_SECTIONS.map((s) => (
@@ -127,7 +127,7 @@ export default function CaseStudy() {
 
       <header className="wrap csp-hero">
         <div className="csp-open">
-          <span className="prompt">$</span> open <b>~/case-studies/{String(index + 1).padStart(2, '0')}-{c.slug}</b>
+          <span className="prompt">$</span> open <b>~/projects/{String(index + 1).padStart(2, '0')}-{c.slug}</b>
         </div>
         <h1>{c.title}<span className="csp-dot" /></h1>
         <p className="csp-lede">{c.blurb}</p>
@@ -174,15 +174,15 @@ export default function CaseStudy() {
 
       <section id="wireframes" className="csp-sec">
         <div className="wrap">
-          <SecHead n={2} cmd="ls ./wireframes" tag="sketches → low-fi" />
-          <div className="csp-shots" data-reveal>
+          <SecHead n={2} cmd="ls ./wireframes" tag={c.wireframesTag ?? 'sketches → low-fi'} />
+          {c.wireframes.length > 0 && <div className="csp-shots" data-reveal>
             {c.wireframes.map((s, i) => (
               <figure key={s.label}>
                 <ImageSlot shot={s} className="csp-frame" />
                 <figcaption><span className="num">{String(i + 1).padStart(2, '0')}</span> {s.caption}</figcaption>
               </figure>
             ))}
-          </div>
+          </div>}
           {c.wireframeDemo && (
             <div className="csp-lofi" data-reveal>
               <Window title="lofi-prototype.html">
@@ -275,8 +275,8 @@ export default function CaseStudy() {
         <div className="wrap">
           <Link to="/#projects" className="csp-btn">← all work</Link>
           {next !== c && (
-            <Link to={`/case-studies/${next.slug}`} className="csp-next-link">
-              <span className="csp-label">Next case study</span>
+            <Link to={`/projects/${next.slug}`} className="csp-next-link">
+              <span className="csp-label">Next project</span>
               <span className="csp-next-title">{next.title} →</span>
             </Link>
           )}
