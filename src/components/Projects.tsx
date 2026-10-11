@@ -34,7 +34,8 @@ export default function Projects() {
                 <h3>{c.title}</h3>
                 <p>{c.blurb}</p>
                 <div className="cs-tags">
-                  {caseSections(c).map((s) => (
+                  {c.stack.slice(0, 4).map((s) => <span key={s} className="cs-tag-stack">{s}</span>)}
+                  {caseSections(c).filter((s) => s.id === 'problem' || s.id === 'prototype').map((s) => (
                     <Link key={s.id} to={`/projects/${c.slug}#${s.id}`}>
                       {s.id === 'prototype' && c.prototype.demo !== 'video' ? `live ${s.label}` : s.label}
                     </Link>

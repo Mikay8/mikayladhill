@@ -69,6 +69,7 @@ a.cs-cover:hover .slot { filter: brightness(.96); }
 }
 .cs-tags a:hover { background: var(--ink); color: var(--paper); }
 .cs-tags-static > * { color: var(--ink-2); }
+.cs-tags > .cs-tag-stack { background: var(--ink); color: var(--paper); }
 
 .cs-actions {
   margin-top: auto;
